@@ -12,6 +12,11 @@ function useStore() {
 // TaskList
 // -------------------------------------------------------------------------
 class TaskList {
+    constructor(tasks) {
+        this.tasks = tasks || [];
+        const taskIds = this.tasks.map((t) => t.id);
+        this.nextId = taskIds.length ? Math.max(...taskIds) + 1 : 1;
+      }
     nextId = 1;
     tasks = [];
   
@@ -38,8 +43,11 @@ class TaskList {
 }
   
 function createTaskStore() {
-    const taskList = new TaskList();
-    return reactive(taskList);
+    const saveTasks = () => localStorage.setItem("todoapp", JSON.stringify(taskStore.tasks));
+    const initialTasks = JSON.parse(localStorage.getItem("todoapp") || "[]");
+    const taskStore = reactive(new TaskList(initialTasks), saveTasks);
+    saveTasks();
+    return taskStore;
 }
 
 // -------------------------------------------------------------------------
