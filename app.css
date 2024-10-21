@@ -43,17 +43,25 @@
     margin-top: 8px;
     font-size: 14px;
     display: flex;
-  }
-  
-  .task-panel .task-counter {
+}
+
+.task-panel .task-counter {
     flex-grow: 1;
-  }
-  
-  .task-panel span {
+}
+
+.task-panel span {
     padding: 5px;
     cursor: pointer;
-  }
-  
-  .task-panel span.active {
+}
+
+.task-panel span.active {
     font-weight: bold;
-  }
+}
+
+.task:hover {
+    background-color: #def0ff;
+}
+
+.task.done label {
+    text-decoration: line-through;
+}
